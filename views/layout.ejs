@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+        <!-- <style>
+            body{
+                background-color: burlywood;
+                text-align: center;
+                margin-top:30px
+            }
+            h1{
+                font-size: 40px;
+            }
+            h2{
+                font-size: 30px;
+            }
+        </style> -->
+
+        <link rel="stylesheet" href="/css/layout.css">
+        <%- style %>
+    </head>
+
+    <body>
+        <%- include("_header"); %>
+      
+        <%- body %>
+
+        <%- include("_footer"); %>
+
+        <%- script %>
+    </body>
+</html>
