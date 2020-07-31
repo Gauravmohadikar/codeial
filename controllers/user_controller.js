@@ -18,3 +18,25 @@ module.exports.history = function(req, res){
         title:"localhost:8000/users/history"
     })
 }
+
+module.exports.signup = function(req, res){
+    return res.render("user_sign_up",{
+        title: "Sign Up"
+    })
+}
+
+module.exports.signin = function(req, res){
+    return res.render("user_sign_in", {
+        title: "Sign In"
+    })
+}
+
+//SignUp
+module.exports.create = function(req, res){
+    //TODO later
+}
+
+//SignIn
+module.exports.createSession = function(req, res){
+    //TODO later
+}
