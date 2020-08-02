@@ -60,35 +60,77 @@ module.exports.create = function(req, res){
     //     }
     // })
 
-    if(req.body.password != req.body.confirm_password)
-    {
-        return res.redirect("back");
+    if(req.body.password != req.body.confirm_password){
+        return res.redirect("back")
     }
 
     User.findOne({email: req.body.email}, function(error, user){
         if(error){
-            console.log("Error in finding user in SignUp", error)
-            return 
+            console.log("Error in finding the user in Sign Up")
+            return ;
         }
 
         if(!user){
             User.create(req.body, function(error, user){
                 if(error){
-                    console.log("Error in creating user in SignUp")
-                    return ;
+                    console.log("Error in creating the user in Sign Up");
+                    return 
                 }
 
-                return res.redirect("/users/sign-in")
+                return res.redirect("/users/sign-in");
             })
         }
+
         else {
             return res.redirect("back")
         }
-
     })
+    
 }
 
 //SignIn
 module.exports.createSession = function(req, res){
-    //TODO later
+    //find the user
+    // User.findOne({email: req.body.email}, function(error, user){
+    //     if(error){
+    //         console.log("Error in finding user in SignIn", error)
+    //         return;
+    //     }
+    //     //if user is found
+    //     if(user){   
+    //         //handle password which doesn't match
+    //         if(user.password != req.body.passsword){
+    //             return res.redirect("back");
+    //         }
+            
+    //         //handle session 
+    //         res.cookie("user_id", user.id);
+    //         return res.redirect("/users/profile");
+    //     }
+
+    //     else{
+    //         //handle user not found
+    //         return res.redirect("back")
+    //     }
+    // })
+
+    User.findOne({email: req.body.email}, function(error, user){
+        if(error){
+            console.log("Error in finding the user in Sign In");
+            return 
+        }
+        if(user){
+            if(user.password != req.body.password){
+                return res.redirect("back")
+            }
+
+            res.cookie("user_id", user.id)
+            return res.redirect("/users/profile")
+        }
+
+        else{
+            return res.redirect("back")
+        }
+    })
+
 }
