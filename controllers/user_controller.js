@@ -22,12 +22,20 @@ module.exports.history = function(req, res){
 }
 
 module.exports.signup = function(req, res){
+    if(req.isAuthenticated()){
+        return res.redirect("/users/profile")
+    }
+
     return res.render("user_sign_up",{
         title: "Sign Up"
     })
 }
 
 module.exports.signin = function(req, res){
+    if(req.isAuthenticated()){
+        return res.redirect("/users/profile")
+    }
+   
     return res.render("user_sign_in", {
         title: "Sign In"
     })
@@ -35,30 +43,6 @@ module.exports.signin = function(req, res){
 
 //SignUp
 module.exports.create = function(req, res){
-    // if(req.body.password != req.body.confirm_password)
-    // {
-    //     return res.redirect("back");
-    // }
-
-    // User.findOne({email: req.body.email}, function(error, user){
-    //     if(error){
-    //         console.log('Error in finding the user in SignUp ',error)
-    //     }
-
-    //     if(!user){
-    //         User.create(req.body, function(error, user){
-    //             if(error){
-    //                 console.log('Error in creating the user in Sign Up', error)
-    //                 return ;
-    //             }
-
-    //             return res.redirect("/users/sign-in")
-    //         })
-    //     }
-    //     else{
-    //         return res.redirect('back');
-    //     }
-    // })
 
     if(req.body.password != req.body.confirm_password)
     {
@@ -90,5 +74,12 @@ module.exports.create = function(req, res){
 
 //SignIn
 module.exports.createSession = function(req, res){
-    //TODO later
+    return res.redirect("/")
+}
+
+//SignOut
+module.exports.destroySession = function(req, res){
+    req.logout()
+
+    return res.redirect("/") ;
 }
