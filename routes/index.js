@@ -11,5 +11,6 @@ router.get("/savage", homeController.savage)
 
 router.use("/users", require("./users"))
 router.use("/social", require("./social"))
+router.use("/posts", require("./posts"))
 
 module.exports = router ;
