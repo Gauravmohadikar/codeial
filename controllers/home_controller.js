@@ -7,6 +7,7 @@
             
         // populate the user for each post
         let posts = await Post.find({})
+        .sort("-createdAt")
         .populate("user")
         .populate({
             path: "comments",
@@ -25,7 +26,7 @@
         }
         
         catch(error){
-            console.log("Error: ", error)
+            console.log("Error: ",error)
             return 
         } 
     }
