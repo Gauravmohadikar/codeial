@@ -4,20 +4,23 @@ const User = require("../models/user")
 
 //authentication using passport save and run
 passport.use(new LocalStartegy({
-    usernameField: "email"
+    usernameField: "email",
+    passReqToCallback: true
     },
 
-    function(email, password, done){
+    function(req, email, password, done){
         //find the user and establish the identity
 
         User.findOne({email: email}, function(error, user){
             if(error){
-                console.log("Error in finding the user --> passport");
+                // console.log("Error in finding the user --> passport");
+                req.flash("error", error)
                 return done(error);
             }
 
             if(!user){
-                console.log("Invalid! username/password")
+                // console.log("Invalid! username/password")
+                req.flash("error", "Invalid Username/Password")
                 return done(null, false) ;
             }
 
