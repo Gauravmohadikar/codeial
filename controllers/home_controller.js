@@ -1,18 +1,12 @@
     const Post = require("../models/post");
     const User = require("../models/user")
     
-    module.exports.home = function(req, res){
-        // return res.end("<h1>Express Server is up for Codieal</h1>")
-        // console.log(req.cookies)
-        // Post.find({}, function(error, posts){
-        //     return res.render('home', {
-        //         title:'Codeial | Home',
-        //         posts: posts
-        //     });
-        // })
+    module.exports.home = async function(req, res){
 
+        try{
+            
         // populate the user for each post
-        Post.find({})
+        let posts = await Post.find({})
         .populate("user")
         .populate({
             path: "comments",
@@ -20,17 +14,20 @@
                 path: "user"
             }
         })
-        .exec(function(error, posts){
 
-            User.find({}, function(error, users){
-                return res.render("home", {
-                    title: "Codeial | Home",
-                    posts: posts, 
-                    all_users: users
-                })                
+        let users = await User.find({})
+   
+            return res.render("home", {
+                title: "Codeial | Home",
+                posts: posts, 
+                all_users: users
             })
-
-        })
+        }
+        
+        catch(error){
+            console.log("Error: ", error)
+            return 
+        } 
     }
 
 

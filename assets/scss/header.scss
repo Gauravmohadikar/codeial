@@ -3,9 +3,10 @@
         display:flex;
         justify-content: space-between;
         color:white;
-        padding:0 10px;
+        padding:0 5px;
         background: #2196f3 ;
         box-shadow: 1px 1px 1px 1px grey;
+        height:60px;
     }
 
     .logo{
@@ -18,7 +19,7 @@
     
     #sign-nav{
         ul{
-            margin:10% 10px;
+            margin:7% 10px;
             display:flex;
             list-style:none;
             font-size: 1.2rem;
