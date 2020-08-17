@@ -19,8 +19,6 @@ const sassMiddleware = require("node-sass-middleware") ;
 const flash = require("connect-flash");
 const custonMware = require("./config/middleware");
 
-
-
 app.use(sassMiddleware({
     src: "./assets/scss",
     dest: "./assets/css",
@@ -34,6 +32,8 @@ app.use(express.urlencoded())
 app.use(cookieParser())
 // app.use("/", require("./routes/index"));
 app.use(express.static("./assets"))
+//make the upload path available to the browser
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 app.use(expressLayout);
 app.set("layout extractStyles", true)
