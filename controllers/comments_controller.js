@@ -37,7 +37,7 @@ module.exports.create = async function(req, res){
         }
    }
    catch(error){
-        req.flash("error", error)
+        req.flash("error", error);
         return res.redirect("back")
 
    }
