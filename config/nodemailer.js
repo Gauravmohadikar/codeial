@@ -1,21 +1,9 @@
 const nodemailer = require("nodemailer")
 const ejs = require("ejs")
 const path = require("path") ;
+const env = require("./environment")
 
-
-let transporter = nodemailer.createTransport({
-    service: "gmail",
-    host: "smtp.gmail.com", 
-    port: 587,
-    secure: false,
-    auth: {
-        user: "abc@gmail.com",
-        pass: "xyz" 
-    },
-    tls: {
-        rejectUnauthorized: false
-      }
-})
+let transporter = nodemailer.createTransport(env.smtp)
 
 //no error is showing plus success is not showing....
 

@@ -1,5 +1,5 @@
 const express = require("express")
-
+const env = require("./config/environment")
 const port = 8000
 const app = express()
 const expressLayout = require("express-ejs-layouts")
@@ -21,9 +21,16 @@ const sassMiddleware = require("node-sass-middleware") ;
 const flash = require("connect-flash");
 const custonMware = require("./config/middleware");
 
+//setup the chat server
+const chatServer = require("http").Server(app)
+const chatSocket = require("./config/chat_socket").chatSockets(chatServer)
+chatServer.listen(5000)
+console.log("Chat server is listen on port 5000")
+const path = require("path")
+
 app.use(sassMiddleware({
-    src: "./assets/scss",
-    dest: "./assets/css",
+    src: path.join(__dirname, env.assest_path, "scss"),
+    dest: path.join(__dirname, env.assest_path, "css"),
     debug: true,
     outputStyle: "extended",
     prefix: "/css"
@@ -33,7 +40,7 @@ app.use(sassMiddleware({
 app.use(express.urlencoded())
 app.use(cookieParser())
 // app.use("/", require("./routes/index"));
-app.use(express.static("./assets"))
+app.use(express.static(env.assest_path))
 //make the upload path available to the browser
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
@@ -48,7 +55,7 @@ app.set("views", "./views")
 app.use(session({
     name: "codeial",
     //TODO change the secret before deployment in production mode
-    secret:"blahsomething",
+    secret: env.session_cookie_key,
     saveUninitialized:false,    
     resave:false,
     cookie:{
