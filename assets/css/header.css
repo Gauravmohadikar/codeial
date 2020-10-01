@@ -5,12 +5,12 @@
   padding: 0 5px;
   background: #2196f3;
   box-shadow: 1px 1px 1px 1px grey;
-  height: 60px; }
+  height: 58px; }
 
 #header-layout .logo p {
   margin: 10px;
-  font-size: 2.4rem;
-  font-weight: bold; }
+  font-size: 2.9rem;
+  font-weight: ITALIC; }
 
 #header-layout #sign-nav ul {
   margin: 7% 10px;
